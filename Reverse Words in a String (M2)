@@ -1,0 +1,22 @@
+public class Solution {
+    public String reverseWords(String s) {
+        ArrayList <String> words = new ArrayList <String>();
+        String word;
+        String answer = null;
+        int start = 0;
+        int index = 0;
+    
+    if( s == " "){
+        return s;
+    }
+    
+    while( index != -1 ){
+        start = index;
+        index = s.indexOf(" ");
+        word = s.substring(start, index);
+        answer = answer + word + " ";
+    }
+         
+         return answer;
+    }
+}
