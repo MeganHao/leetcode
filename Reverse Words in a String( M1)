@@ -1,0 +1,25 @@
+public class Solution {
+    public String reverseWords(String s) {
+        ArrayList <String> words = new ArrayList <String>();
+        ArrayList <Char> chars = new ArrayList <Char>();
+        String word;
+        String answer;
+        
+        for( int i = 0; i < s.length; i++){
+             if( s.CharAt(i))!= " " ){
+                 chars.add( s.CharAt(i));
+             }
+             else{
+                 word = new String( chars );
+                 chars = new ArrayList <Char>();
+                 words.add( word );
+             }
+         }
+         
+         for ( int i = 0; i < words.length(); i++){
+             answer = answer + words.get(i) + " ";
+         }
+         
+         return answer;
+    }
+}
