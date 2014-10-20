@@ -1,0 +1,14 @@
+public class Solution {
+    public boolean isPalindrome(int x) {
+        int ox = x;//no need to specify as long 
+        int rx = 0;
+        if(x<0){   //all the negative value are not palindrome
+            return false;
+        }
+        while(x!=0){
+            rx = rx*10 + x%10;
+            x = x/10;
+        }
+        return rx == ox;//easy way to compare and return
+    }
+}
