@@ -1,0 +1,30 @@
+public class Solution {
+    public ListNode mergeKLists(List<ListNode> lists) {
+    //如果不是array是list类型lists的话，更容易得到sublist，那么就可以对mergeKLists本身进行devide and conqur
+        int size = lists.size();
+        if (size == 0) return null;
+        else if (size == 1) return lists.get(0);
+        else if (size == 2) return mergeTwoLists(lists.get(0), lists.get(1));
+        else {
+            return mergeTwoLists(mergeKLists(lists.subList(0, size/2 - 1)),
+                                 mergeKLists(lists.subList(size/2, size - 1)));
+        }
+    }
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null) {
+            return list2;
+        }
+        if (list2 == null) {
+            return list1;
+        }
+        ListNode list;
+        if (list1.val <= list2.val) {
+            list = list1;
+            list.next = mergeTwoLists(list1.next, list2);
+        } else {
+            list = list2;
+            list.next = mergeTwoLists(list1, list2.next);
+        }
+        return list;
+    }
+}
