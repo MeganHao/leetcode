@@ -1,0 +1,42 @@
+public class Solution {
+//在主函数的内部二分法去调用basic函数mergeTwoLists
+//所以分为三层，主函数，实现二分法，mergeTwoLists
+    public ListNode mergeKLists(ListNode[] lists) {
+        int start = 0;
+        int end = lists.length - 1;
+        if (end == -1) {
+            return null;
+        } else {
+            return mergeLists(lists, start, end);
+        }
+    }
+    public ListNode mergeLists(ListNode[] lists, int start, int end) {
+        if (start == end) {
+            return lists[start];
+        }
+        if (end == (start + 1)) {
+            return (mergeTwoLists(lists[start], lists[end]));
+        }
+        int mid = (start + end)/2;
+        ListNode list1 = mergeLists(lists, start, mid);
+        ListNode list2 = mergeLists(lists, mid + 1, end);
+        return mergeTwoLists(list1, list2);
+    }
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null) {
+            return list2;
+        }
+        if (list2 == null) {
+            return list1;
+        }
+        ListNode list;
+        if (list1.val <= list2.val) {
+            list = list1;
+            list.next = mergeTwoLists(list1.next, list2);
+        } else {
+            list = list2;
+            list.next = mergeTwoLists(list1, list2.next);
+        }
+        return list;
+    }
+}
