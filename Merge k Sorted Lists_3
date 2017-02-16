@@ -1,0 +1,49 @@
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+    //使用priority queue能自动帮你排序
+    //学会了：
+    //如何初始化PriorityQueue
+    //如何重写comparator,comparator函数类型和compare的参数类型是一致的
+    
+    //首先是考虑edge case
+        if(lists == null || lists.length == 0) {
+            return null;
+        }
+        
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, new Comparator<ListNode>() {
+            @Override
+            public int compare(ListNode l1, ListNode l2){
+                if (l1.val < l2.val){
+                    return -1;
+                } else if (l1.val == l2.val) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        }
+        );
+        
+        for (ListNode node:lists) {
+            if(node != null) {
+                queue.add(node);
+            }
+        }
+        
+        //此处值得注意的是ListNode的用法
+        //不要去overwrite已存在的ListNode.而是用.next去指向你想赋值的ListNode
+        ListNode curr = new ListNode(0);
+        ListNode head = curr;
+        
+        while (!queue.isEmpty()) {
+            curr.next = queue.poll();
+            curr = curr.next;
+            
+            if(curr.next != null) {
+                queue.add(curr.next);
+            }
+        }
+        
+        return head.next;
+    }
+}
