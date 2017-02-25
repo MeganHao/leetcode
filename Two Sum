@@ -1,0 +1,17 @@
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+    //利用 map 来更好的search value
+    // 容易想到用map来构建组成sum的两个数，但是并不是，那样就不能通过一次遍历做到了
+        int[] result = new int[2];
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                result[1] = i;
+                result[0] = map.get(target - nums[i]);
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return result;
+    }
+}
