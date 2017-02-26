@@ -1,0 +1,19 @@
+public class Solution {
+    public int majorityElement(int[] nums) {
+    // greedy 算法
+        int count = 0;
+        int maj = nums[0];
+        for (int num : nums) {
+            if (num == maj || count == 0) {
+                count++;
+                maj = num;
+            } else {
+                count--;
+                if (count < 0) {
+                    maj = num;
+                }
+            }
+        }
+        return maj;
+    }
+}
