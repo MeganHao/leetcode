@@ -1,0 +1,31 @@
+public class Solution {
+    private int maxLength, mid = 0;
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return null;
+        }
+        // This is an edge case
+        if (s.length() < 2) {
+            return s;
+        }
+        for (int i = 0; i < s.length() - 1; i++) {
+            //对奇偶情况各算一次
+            findPalindrome(s, i, i);
+            findPalindrome(s, i, i + 1);
+        }
+        // substring function 没有upcase
+        // 第一个是 start index, 第二个是 end index，但此值不显示
+        return s.substring(mid, mid + maxLength);
+    }
+    public void findPalindrome(String s, int start, int end) {
+        while(start >= 0 && end <= s.length() - 1 && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
+        }
+        int length = end - start - 1;
+        if (length > maxLength) {
+            mid = start + 1;
+            maxLength = length;
+        }
+    }
+}
